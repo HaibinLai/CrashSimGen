@@ -6,6 +6,8 @@ Haibin Lai, Wenkun shen and Qihao
 
 Southern University of Science and Technology
 
+![alt text](img/image.png)
+
 ## Abstract
 
 CrashSimGen is a project that generates dangerous road scenarios using diffusion models for autonomous driving risk assessment. The project begins by encoding a large set of driving scenes as image data, and training a dangerous scenario recognizer that automatically identifies and labels potentially hazardous situations. These recognized dangerous scene thumbnails are then fed into a diffusion model to generate new dangerous scene thumbnails.
