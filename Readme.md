@@ -16,6 +16,6 @@ To transform the generated thumbnails into a format usable by autonomous driving
 
 This project makes use of the following open-source code:
 
-- [DriveSceneGen](https://github.com/SS47816/DriveSceneGen.git) by SS47816 (Licensed under Apache License 2.0).
+- [DriveSceneGen](https://github.com/SS47816/DriveSceneGen.git) by SS47816 (Licensed under Apache License 2.0). Website: [DriveSceneGen](https://ss47816.github.io/DriveSceneGen/)
 
 We have integrated this code into our system, and made modifications to suit our needs to run the generative scenes in Carla. See the individual files for the list of changes.
