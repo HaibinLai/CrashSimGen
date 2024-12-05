@@ -144,8 +144,8 @@ def chunks(input, n):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Vectorization')
-    parser.add_argument('--load_path',default="/data/haibin/preprocess", type=str, help='path to dataset files')
-    parser.add_argument('--save_path', default="/data/haibin/ML_DM/rasterized/",type=str, help='path to save processed data')
+    parser.add_argument('--load_path',default="/data/haibin/ML_DM/training_20s", type=str, help='path to dataset files')
+    parser.add_argument('--save_path', default="/data/haibin/ML_DM/vectorization",type=str, help='path to save processed data')
     parser.add_argument('--cfg_file', default="./DriveSceneGen/config/vectorization.yaml",type=str, help='path to cfg file')
     
     sys_args = parser.parse_args()
@@ -156,8 +156,8 @@ if __name__ == "__main__":
     
     # Generated Dataset Paths
     # input_dir = f'/data/haibin/ML_DM/generation/generated_{map_range}m_5k'
-    input_dir = f'/data/haibin/ML_DM/generation/generated_80m_5k'
-    generated_imgs_dir = os.path.join(input_dir, 'diffusion')
+    input_dir = f'/data/haibin/ML_DM/genernation/20s_A100'
+    generated_imgs_dir = input_dir # os.path.join(input_dir, 'diffusion')
     outputs_dir = input_dir
     
     vectorized_output_dir = os.path.join(outputs_dir, "vectorized")

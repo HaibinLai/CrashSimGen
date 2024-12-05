@@ -1,5 +1,5 @@
 version: 1
-n_proccess: 8 # Numer of available processors
+n_proccess: 16 # Numer of available processors
 
 rasterization:
     map_range: 80
