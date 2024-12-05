@@ -2,7 +2,7 @@
 
 ### CrashSimGen: Generating Dangerous Road Scenarios with Diffusion Models for Autonomous Driving Risk Assessment
 
-[Proposal:(Coming Soon)]() [PPT(Coming Soon)]() [Project Page](https://haibinlai.github.io/CrashSimGen/) [Code](https://github.com/HaibinLai/CrashSimGen)
+[[Proposal:(Coming Soon)]()] [[PPT(Coming Soon)]()] [[Project Page](https://haibinlai.github.io/CrashSimGen/)] [[Code](https://github.com/HaibinLai/CrashSimGen)]
 
 **Haibin Lai, Wenkun shen and Qihao**
 
