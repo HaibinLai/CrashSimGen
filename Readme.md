@@ -7,7 +7,7 @@ Haibin Lai, Wenkun shen and Qihao
 Southern University of Science and Technology
 
 <!-- ![alt text](img/image.png) -->
-![alt text](ML_DM.drawio.png)
+![CrashSimGen Workflow](img/ML_DM.drawio.png)
 
 ## Abstract
 
