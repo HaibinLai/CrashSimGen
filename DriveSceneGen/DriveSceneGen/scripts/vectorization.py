@@ -152,6 +152,7 @@ if __name__ == "__main__":
     with open(sys_args.cfg_file, 'r') as file:
         cfg = yaml.safe_load(file)
     n_proc = cfg['n_proccess']
+    
     map_range = cfg['vectoriztion']['map_range']
     
     # Generated Dataset Paths
@@ -177,6 +178,8 @@ if __name__ == "__main__":
 
     # Initialize the parallel processes list
     processes = []
+# 
+    # multiprocessing_func(chunked_files[proc_id], cfg['vectoriztion'], vectorized_output_dir, vectorized_picture_dir, graph_dir, agent_dir, n_proc, 1)
     for proc_id in np.arange(n_proc):
         """Execute the target function on the n_proc target processors using the splitted input"""
         p = multiprocessing.Process(
