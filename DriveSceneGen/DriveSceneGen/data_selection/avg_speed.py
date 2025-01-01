@@ -35,6 +35,7 @@ def calculate_average_speed(file_path):
         return 0  # 如果没有样本，返回0
 
 # 调用函数并打印结果
-file_path = 'one_scenario.txt'  # Average speed: 3.6949330306565877
-average_speed = calculate_average_speed(file_path)
-print(f'Average speed: {average_speed}')
+for i in range(1000):
+    file_path = 'one_scenario_{i}.txt'  # Average speed: 3.6949330306565877
+    average_speed = calculate_average_speed(file_path)
+    print(f'Average speed: of record {i} : {average_speed}')

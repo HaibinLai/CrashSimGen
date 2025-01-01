@@ -106,7 +106,13 @@ def add_noise_verification(data,index,noisy=True,intensities=100):
     plt.show()
 
 
-def training(NUM_EPOCHS=50, INFER_STEPS=1000):
+
+
+
+
+
+
+def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000):
 
     # ##---load dataset---####
     @dataclass
@@ -122,11 +128,31 @@ def training(NUM_EPOCHS=50, INFER_STEPS=1000):
         save_image_epochs = 1
         save_model_epochs = 1 # save model epoch
         mixed_precision = 'fp16'  # `no` for float32, `fp16` for automatic mixed precision
-        output_dir = '/data/haibin/ML_DM/model/1_new'  # the generated model name
+        output_dir = '/data/haibin/ML_DM/model/fine_tune'  # the generated model name
         # dataset_name = "/data/haibin/ML_DM/rasterized/GT_70k_s80_dxdy_agents_img/*"
-        dataset_name = "/data/haibin/ML_DM/rasterized_training_20s/1_new/*"
+        dataset_name = "/data/haibin/ML_DM/rasterized_training_20s/1_1_new/*"
         overwrite_output_dir = True  # overwrite the old model when re-running the notebook
         seed = 14555
+
+        def __init__(self, learning_rate: float, num_epochs: int):
+            # Set custom logic or override default values
+            self.learning_rate = learning_rate
+            self.num_epochs = num_epochs
+            # Optional: Set default values for other fields
+            self.patterns_size_height = 256
+            self.patterns_size_width = 256
+            self.train_batch_size = 36
+            self.eval_batch_size = 1
+            self.gradient_accumulation_steps = 1
+            self.lr_warmup_steps = 500
+            self.save_image_epochs = 1
+            self.save_model_epochs = 1
+            self.mixed_precision = 'fp16'
+            self.output_dir = '/data/haibin/ML_DM/model/fine_tune'
+            self.dataset_name = "/data/haibin/ML_DM/rasterized_training_20s/1_1_new/*"
+            self.overwrite_output_dir = True
+            self.seed = 14555
+
 
     config_1 = TrainingConfig_1(learning_rate=1e-5, num_epochs=NUM_EPOCHS)
 

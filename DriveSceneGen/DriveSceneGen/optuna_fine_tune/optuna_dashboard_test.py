@@ -3,7 +3,8 @@ import optuna
 def objective(trial):
     x = trial.suggest_float("x", -100, 100)
     y = trial.suggest_categorical("y", [-1, 0, 1])
-    return x**2 + y
+    z = trial.suggest_float("z", -50, 50)
+    return x**2 + y + z**2 - x * z
 
 if __name__ == "__main__":
     study = optuna.create_study(
