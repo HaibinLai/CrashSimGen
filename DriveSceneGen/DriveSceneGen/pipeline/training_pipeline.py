@@ -9,8 +9,9 @@ import numpy as np
 
 
 class TrainingPipeline():
-    def __init__(self,config):
+    def __init__(self,config, inference_steps=1000):
         self.config = config
+        self.inference_steps = inference_steps
         
     ####----evaluate---####
     def evaluate(self,config, epoch, pipeline):
@@ -24,7 +25,7 @@ class TrainingPipeline():
         ])
 
         polylines_patterns = pipeline(
-            num_inference_steps=1000,
+            num_inference_steps=self.inference_steps,
             batch_size = config.eval_batch_size, 
             generator=torch.manual_seed(config.seed),
             output_type="np.array",
