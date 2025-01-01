@@ -1,6 +1,6 @@
 # CrashSimGen
 
-[[Proposal:(Coming Soon)]()] [[PPT(Coming Soon)]()] [[Project Page](https://haibinlai.github.io/CrashSimGen/)] [[Code](https://github.com/HaibinLai/CrashSimGen)]
+[[Proposal:(Coming Soon)]()] [[PPT]()] [[Project Page](https://haibinlai.github.io/CrashSimGen/)] [[Code](https://github.com/HaibinLai/CrashSimGen)]
 
 ## CrashSimGen: Generating Dangerous Scenarios with Diffusion Models for self-Driving
 
