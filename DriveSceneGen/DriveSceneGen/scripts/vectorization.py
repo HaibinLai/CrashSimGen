@@ -157,7 +157,7 @@ if __name__ == "__main__":
     
     # Generated Dataset Paths
     # input_dir = f'/data/haibin/ML_DM/generation/generated_{map_range}m_5k'
-    input_dir = f'/data/haibin/ML_DM/genernation/20s_A100'
+    input_dir = f'/data/haibin/ML_DM/genernation/20s_A100/good_pic'
     generated_imgs_dir = input_dir # os.path.join(input_dir, 'diffusion')
     outputs_dir = input_dir
     
