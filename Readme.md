@@ -8,6 +8,8 @@
 
 Southern University of Science and Technology
 
+CS329 Machine Learning (H) Course Project
+
 <!-- ![alt text](img/image.png) -->
 <!-- ![CrashSimGen Workflow](img/ML_DM.drawio.png) -->
 ![CrashSimGen Workflow and our work](img/ML_DM2.drawio.png)
