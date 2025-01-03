@@ -766,4 +766,6 @@ def extract_polylines_from_img(img_color: Image, img_gray: Image=None, map_range
         else:
             plt.show()
 
+    # print(output)
+
     return output, directed_graph

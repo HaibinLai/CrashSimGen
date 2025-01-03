@@ -106,3 +106,13 @@ class TrainingPipeline():
 
                 if (epoch + 1) % config.save_model_epochs == 0 or epoch == config.num_epochs - 1:
                     pipeline.save_pretrained(config.output_dir) 
+
+        # After all epochs, log a final message
+        if accelerator.is_main_process:
+            print("Training finished. Logging final results.")
+            final_logs = {"final_loss": loss.detach().item(), "total_epochs": config.num_epochs}
+            accelerator.log(final_logs, step=global_step)
+
+             # 将日志写入文件
+            with open("/data/haibin/ML_DM/logs/training_logs.txt", "a") as log_file:
+                log_file.write(f"step {global_step}: Final Loss: {final_logs['final_loss']}  Total Epochs: {config.num_epochs}\n")

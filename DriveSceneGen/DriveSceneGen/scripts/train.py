@@ -176,12 +176,12 @@ def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000):
         down_block_types=( 
             "DownBlock2D",  # a regular ResNet downsampling block
             "DownBlock2D",  
-            "DownBlock2D",  # a ResNet downsampling block with spatial self-attention
-            "DownBlock2D",
+            "AttnDownBlock2D",  # a ResNet downsampling block with spatial self-attention
+            "AttnDownBlock2D",
         ), 
         up_block_types=(
-            "UpBlock2D",  # a regular ResNet upsampling block
-            "UpBlock2D",  # a ResNet upsampling block with spatial self-attention  
+            "AttenUpBlock2D",  # a regular ResNet upsampling block
+            "AttenUpBlock2D",  # a ResNet upsampling block with spatial self-attention  
             "UpBlock2D",
             "UpBlock2D"  
         ),
