@@ -1,5 +1,6 @@
 import optuna
 from DriveSceneGen.scripts.train import training_mine
+import re
 
 log_path = '/data/haibin/ML_DM/logs/training_logs.txt'
 
@@ -7,10 +8,11 @@ log_path = '/data/haibin/ML_DM/logs/training_logs.txt'
 def objective(trial):
     # 从 Optuna 提供的 trial 对象中采样参数
     NUM_EPOCHS = trial.suggest_int("NUM_EPOCHS", 3, 20) 
-    INFER_STEPS = trial.suggest_int("INFER_STEPS", 300, 2000)  
+    TRAIN_BATCH_SIZE = trial.suggest_int("TRAIN_BATCH_SIZE", 32, 128)
+    INFER_STEPS = 1000
     
     # 调用 training_mine 函数
-    training_mine(NUM_EPOCHS=NUM_EPOCHS, INFER_STEPS=INFER_STEPS)  # 调用训练函数
+    training_mine(NUM_EPOCHS=NUM_EPOCHS, INFER_STEPS=INFER_STEPS, TRAIN_BATCH_SIZE=TRAIN_BATCH_SIZE)  # 调用训练函数
 
     # 定义正则表达式，匹配 step、final_loss 和 total_epochs
     pattern = r"step (\d+): Final Loss: ([\d.]+)  Total Epochs: (\d+)"
@@ -39,7 +41,7 @@ if __name__ == "__main__":
     study = optuna.create_study(
         direction="minimize",  # 假设目标是最小化损失
         storage="sqlite:///db.sqlite3",  # 存储优化的结果
-        study_name="training-optimization"  # 研究名称
+        study_name="training-DM004"  # 研究名称
     )
     study.optimize(objective, n_trials=50)  # 优化 50 次
 

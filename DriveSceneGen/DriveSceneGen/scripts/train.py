@@ -112,7 +112,7 @@ def add_noise_verification(data,index,noisy=True,intensities=100):
 
 
 
-def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000):
+def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000, TRAIN_BATCH_SIZE=36):
 
     # ##---load dataset---####
     @dataclass
@@ -134,14 +134,14 @@ def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000):
         overwrite_output_dir = True  # overwrite the old model when re-running the notebook
         seed = 14555
 
-        def __init__(self, learning_rate: float, num_epochs: int):
+        def __init__(self, learning_rate: float, num_epochs: int, train_batch_size: int):
             # Set custom logic or override default values
             self.learning_rate = learning_rate
             self.num_epochs = num_epochs
             # Optional: Set default values for other fields
             self.patterns_size_height = 256
             self.patterns_size_width = 256
-            self.train_batch_size = 36
+            self.train_batch_size = train_batch_size
             self.eval_batch_size = 1
             self.gradient_accumulation_steps = 1
             self.lr_warmup_steps = 500
@@ -154,7 +154,7 @@ def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000):
             self.seed = 14555
 
 
-    config_1 = TrainingConfig_1(learning_rate=1e-5, num_epochs=NUM_EPOCHS)
+    config_1 = TrainingConfig_1(learning_rate=1e-5, num_epochs=NUM_EPOCHS, train_batch_size=TRAIN_BATCH_SIZE)
 
     Mydataset = Image_Dataset(config_1)
     train_dataloader = torch.utils.data.DataLoader(Mydataset, batch_size=config_1.train_batch_size, shuffle=True)
@@ -180,8 +180,8 @@ def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000):
             "AttnDownBlock2D",
         ), 
         up_block_types=(
-            "AttenUpBlock2D",  # a regular ResNet upsampling block
-            "AttenUpBlock2D",  # a ResNet upsampling block with spatial self-attention  
+            "AttnUpBlock2D",  # a regular ResNet upsampling block
+            "AttnUpBlock2D",  # a ResNet upsampling block with spatial self-attention  
             "UpBlock2D",
             "UpBlock2D"  
         ),
@@ -192,6 +192,7 @@ def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000):
 
     pipeline = TrainingPipeline(config_1, inference_steps=INFER_STEPS)
     noise_scheduler = DDPMScheduler()
+    # noise_scheduler = DDIMScheduler.from_pretrained("google/ddpm-celebahq-256")
     optimizer = torch.optim.AdamW(model_1.parameters(), lr=config_1.learning_rate)
 
     lr_scheduler = get_cosine_schedule_with_warmup(
