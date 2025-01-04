@@ -1,5 +1,5 @@
 import torch
-from diffusers import UNet2DModel,DDPMScheduler
+from diffusers import UNet2DModel,DDPMScheduler, DDIMScheduler
 from diffusers.optimization import get_cosine_schedule_with_warmup
 from accelerate import notebook_launcher
 import matplotlib.pyplot as plt
@@ -106,13 +106,35 @@ def add_noise_verification(data,index,noisy=True,intensities=100):
     plt.show()
 
 
+from torch import nn
+class SelfAttention(nn.Module):
+	def __init__(self,channels):
+		super().__init__()
+		self.channels = channels
+		self.mha = nn.MultiheadAttention(channels, 4, batch_first=True)
+		self.ln = nn.LayerNorm([channels])
+		self.ff = nn.Sequential(
+			nn.LayerNorm([channels]),
+			nn.Linear(channels,channels),
+			nn.GELU(),
+			nn.Linear(channels,channels)
+			)
+	
+	def forward(self,x):
+		B,C,H,W = x.shape
+		x = x.reshape(-1,self.channels,H*W).swapaxes(1,2)
+		x_ln = self.ln(x)
+		attention_value = self.mha(x_ln)
+		attention_value = attention_value + x
+		attention_value = self.ff(attention_value)+ attention_value
+		return attention_value.swapaxes(1,2).view(-1,self.channels,H,W)
 
 
 
 
 
 
-def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000, TRAIN_BATCH_SIZE=36):
+def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000, TRAIN_BATCH_SIZE=36, LEARNING_RATE=1e-5):
 
     # ##---load dataset---####
     @dataclass
@@ -130,7 +152,7 @@ def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000, TRAIN_BATCH_SIZE=36):
         mixed_precision = 'fp16'  # `no` for float32, `fp16` for automatic mixed precision
         output_dir = '/data/haibin/ML_DM/model/fine_tune'  # the generated model name
         # dataset_name = "/data/haibin/ML_DM/rasterized/GT_70k_s80_dxdy_agents_img/*"
-        dataset_name = "/data/haibin/ML_DM/rasterized_training_20s/1_1_new/*"
+        dataset_name = "/data/haibin/ML_DM/rasterized_training_20s/1_2_new/*"
         overwrite_output_dir = True  # overwrite the old model when re-running the notebook
         seed = 14555
 
@@ -149,12 +171,12 @@ def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000, TRAIN_BATCH_SIZE=36):
             self.save_model_epochs = 1
             self.mixed_precision = 'fp16'
             self.output_dir = '/data/haibin/ML_DM/model/fine_tune'
-            self.dataset_name = "/data/haibin/ML_DM/rasterized_training_20s/1_1_new/*"
+            self.dataset_name = "/data/haibin/ML_DM/rasterized_training_20s/1_2_new/*"
             self.overwrite_output_dir = True
             self.seed = 14555
 
 
-    config_1 = TrainingConfig_1(learning_rate=1e-5, num_epochs=NUM_EPOCHS, train_batch_size=TRAIN_BATCH_SIZE)
+    config_1 = TrainingConfig_1(learning_rate=LEARNING_RATE, num_epochs=NUM_EPOCHS, train_batch_size=TRAIN_BATCH_SIZE)
 
     Mydataset = Image_Dataset(config_1)
     train_dataloader = torch.utils.data.DataLoader(Mydataset, batch_size=config_1.train_batch_size, shuffle=True)
@@ -165,6 +187,7 @@ def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000, TRAIN_BATCH_SIZE=36):
     init_channel2 = 128
     init_channel3 = 256
     init_channel4 = 512
+    init_channel5 = 1024
 
     ## UNet2D Model
     model_1 = UNet2DModel(
@@ -178,12 +201,14 @@ def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000, TRAIN_BATCH_SIZE=36):
             "DownBlock2D",  
             "AttnDownBlock2D",  # a ResNet downsampling block with spatial self-attention
             "AttnDownBlock2D",
+            # "AttnDownBlock2D",
         ), 
         up_block_types=(
+            "AttnUpBlock2D", 
             "AttnUpBlock2D",  # a regular ResNet upsampling block
             "AttnUpBlock2D",  # a ResNet upsampling block with spatial self-attention  
             "UpBlock2D",
-            "UpBlock2D"  
+            # "UpBlock2D"  
         ),
     )
     # model = UNet2DModel.from_pretrained(config.output_dir,subfolder="unet")
@@ -191,8 +216,9 @@ def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000, TRAIN_BATCH_SIZE=36):
 
 
     pipeline = TrainingPipeline(config_1, inference_steps=INFER_STEPS)
-    noise_scheduler = DDPMScheduler()
+    # noise_scheduler = DDPMScheduler()
     # noise_scheduler = DDIMScheduler.from_pretrained("google/ddpm-celebahq-256")
+    noise_scheduler = DDIMScheduler()
     optimizer = torch.optim.AdamW(model_1.parameters(), lr=config_1.learning_rate)
 
     lr_scheduler = get_cosine_schedule_with_warmup(

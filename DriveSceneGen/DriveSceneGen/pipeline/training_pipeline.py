@@ -84,6 +84,9 @@ class TrainingPipeline():
                     # Predict the noise residual
                     noise_pred = model(noisy_pattern, timesteps, return_dict=False)[0]
                     loss = F.mse_loss(noise_pred, noise)
+                    
+                    
+
                     accelerator.backward(loss)
 
                     accelerator.clip_grad_norm_(model.parameters(), 1.0)
@@ -92,7 +95,13 @@ class TrainingPipeline():
                     optimizer.zero_grad()
                 
                 progress_bar.update(1)
-                logs = {"loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0], "step": global_step}
+                
+                logs = {"loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0], "step": global_step, "Cross Entropy": F.cross_entropy(noise_pred, noise).detach().item()}
+                # cross_entropy = F.cross_entropy(noise_pred, noise)
+                # roc = F.accuracy(noise_pred, noise)
+                # Log the loss and other metrics
+                # print(f"Loss: {loss.detach().item()}, Cross Entropy: {cross_entropy.detach().item()}")
+                
                 progress_bar.set_postfix(**logs)
                 accelerator.log(logs, step=global_step)
                 global_step += 1
