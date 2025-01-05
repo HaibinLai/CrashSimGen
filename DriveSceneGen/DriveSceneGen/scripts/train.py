@@ -106,28 +106,28 @@ def add_noise_verification(data,index,noisy=True,intensities=100):
     plt.show()
 
 
-from torch import nn
-class SelfAttention(nn.Module):
-	def __init__(self,channels):
-		super().__init__()
-		self.channels = channels
-		self.mha = nn.MultiheadAttention(channels, 4, batch_first=True)
-		self.ln = nn.LayerNorm([channels])
-		self.ff = nn.Sequential(
-			nn.LayerNorm([channels]),
-			nn.Linear(channels,channels),
-			nn.GELU(),
-			nn.Linear(channels,channels)
-			)
+# from torch import nn
+# class SelfAttention(nn.Module):
+# 	def __init__(self,channels):
+# 		super().__init__()
+# 		self.channels = channels
+# 		self.mha = nn.MultiheadAttention(channels, 4, batch_first=True)
+# 		self.ln = nn.LayerNorm([channels])
+# 		self.ff = nn.Sequential(
+# 			nn.LayerNorm([channels]),
+# 			nn.Linear(channels,channels),
+# 			nn.GELU(),
+# 			nn.Linear(channels,channels)
+# 			)
 	
-	def forward(self,x):
-		B,C,H,W = x.shape
-		x = x.reshape(-1,self.channels,H*W).swapaxes(1,2)
-		x_ln = self.ln(x)
-		attention_value = self.mha(x_ln)
-		attention_value = attention_value + x
-		attention_value = self.ff(attention_value)+ attention_value
-		return attention_value.swapaxes(1,2).view(-1,self.channels,H,W)
+# 	def forward(self,x):
+# 		B,C,H,W = x.shape
+# 		x = x.reshape(-1,self.channels,H*W).swapaxes(1,2)
+# 		x_ln = self.ln(x)
+# 		attention_value = self.mha(x_ln)
+# 		attention_value = attention_value + x
+# 		attention_value = self.ff(attention_value)+ attention_value
+# 		return attention_value.swapaxes(1,2).view(-1,self.channels,H,W)
 
 
 
@@ -205,10 +205,10 @@ def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000, TRAIN_BATCH_SIZE=36, LEARNING
         ), 
         up_block_types=(
             "AttnUpBlock2D", 
-            "AttnUpBlock2D",  # a regular ResNet upsampling block
-            "AttnUpBlock2D",  # a ResNet upsampling block with spatial self-attention  
-            "UpBlock2D",
-            # "UpBlock2D"  
+            "AttnUpBlock2D", # a ResNet upsampling block with spatial self-attention  
+            # "AttnUpBlock2D",  
+            "UpBlock2D",  # a regular ResNet upsampling block
+            "UpBlock2D"  
         ),
     )
     # model = UNet2DModel.from_pretrained(config.output_dir,subfolder="unet")
