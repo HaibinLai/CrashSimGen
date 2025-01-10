@@ -8,8 +8,8 @@ from DriveSceneGen.scripts.train import training_mine
 # 定义 Optuna 优化
 if __name__ == "__main__":
     # 从 Optuna 提供的 trial 对象中采样参数
-    NUM_EPOCHS = 3
-    TRAIN_BATCH_SIZE = 44
+    NUM_EPOCHS = 5
+    TRAIN_BATCH_SIZE = 32
     Learning_rate = 0.0001
     INFER_STEPS = 1000
     
