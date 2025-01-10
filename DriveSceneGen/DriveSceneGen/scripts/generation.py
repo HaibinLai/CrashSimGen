@@ -3,11 +3,11 @@ import os
 
 # initialize the model
 diffusion_steps = 1000
-modelpath = "/data/haibin/ML_DM/model/DDIM_Improve"
+modelpath = "/data/haibin/ML_DM/model/DDIM_Improve2"
 ddpm = DDPMPipeline.from_pretrained(modelpath,variant="fp32").to('cuda')
 
 # output_dir = "/data/haibin/ML_DM/generation/generated_80m_5k/diffusion_good"
-output_dir = "/data/haibin/ML_DM/genernation/DDIM_Imp/"
+output_dir = "/data/haibin/ML_DM/genernation/DDIM_Imp2/"
 os.makedirs(output_dir, exist_ok=True)
 
 for num in range(100):
