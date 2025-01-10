@@ -107,8 +107,6 @@ def calculate_road_length(data):
     print(f"Road Length: {length:.2f} meters")
     return length
 
-
-
 def calculate_initial_curvature(data, road_length):
     # 取前三个点来估算初始曲率
     x1, y1, _, _, _, _ = data[0]
@@ -119,8 +117,7 @@ def calculate_initial_curvature(data, road_length):
     dx1, dy1 = x2 - x1, y2 - y1
     dx2, dy2 = x3 - x2, y3 - y2
 
-    # 估算曲率：通过曲率公式 k = 2 * (dx1 * dy2 - dy1 * dx2) / (|r1| * |r2|)
-    # 这里假设 x1, x2, x3 为弯道上的连续三个点
+    # Curvature Estimation: k = 2 * (dx1 * dy2 - dy1 * dx2) / (|r1| * |r2|)
     numerator = dx1 * dy2 - dy1 * dx2
     denominator = (dx1**2 + dy1**2) * (dx2**2 + dy2**2)
     curvature = 2 * numerator / np.sqrt(denominator) if denominator != 0 else 0
