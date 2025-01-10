@@ -3,17 +3,17 @@ import os
 
 # initialize the model
 diffusion_steps = 1000
-modelpath = "/data/haibin/ML_DM/model/DDIM"
+modelpath = "/data/haibin/ML_DM/model/DDIM_Improve"
 ddpm = DDPMPipeline.from_pretrained(modelpath,variant="fp32").to('cuda')
 
 # output_dir = "/data/haibin/ML_DM/generation/generated_80m_5k/diffusion_good"
-output_dir = "/data/haibin/ML_DM/genernation/DDIM/"
+output_dir = "/data/haibin/ML_DM/genernation/DDIM_Imp/"
 os.makedirs(output_dir, exist_ok=True)
 
 for num in range(100):
     # generate dx dy
     polylines = ddpm(
-        batch_size = 2,
+        batch_size = 32,
         # generator=torch.manual_seed(1),
         num_inference_steps=diffusion_steps,
         #   output_type="pil",

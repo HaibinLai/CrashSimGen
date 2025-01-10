@@ -150,7 +150,7 @@ def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000, TRAIN_BATCH_SIZE=36, LEARNING
         save_image_epochs = 1
         save_model_epochs = 1 # save model epoch
         mixed_precision = 'fp16'  # `no` for float32, `fp16` for automatic mixed precision
-        output_dir = '/data/haibin/ML_DM/model/DDIM_Improve'  # the generated model name
+        output_dir = '/data/haibin/ML_DM/model/DDIM_Improve2'  # the generated model name
         # dataset_name = "/data/haibin/ML_DM/rasterized/GT_70k_s80_dxdy_agents_img/*"
         dataset_name = "/data/haibin/ML_DM/All_image/*"
         overwrite_output_dir = True  # overwrite the old model when re-running the notebook
@@ -170,7 +170,7 @@ def training_mine(NUM_EPOCHS=50, INFER_STEPS=1000, TRAIN_BATCH_SIZE=36, LEARNING
             self.save_image_epochs = 1
             self.save_model_epochs = 1
             self.mixed_precision = 'fp16'
-            self.output_dir = '/data/haibin/ML_DM/model/DDIM_Improve'
+            self.output_dir = '/data/haibin/ML_DM/model/DDIM_Improve2'
             self.dataset_name = "/data/haibin/ML_DM/All_image/*"
             self.overwrite_output_dir = True
             self.seed = 14555
