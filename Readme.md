@@ -4,7 +4,7 @@
 
 ## CrashSimGen: Generating Dangerous Scenarios with Diffusion Models for self-Driving
 
-**Haibin Lai, Wenkun shen and Qihao**
+**Haibin Lai, Wenkun shen**
 
 Southern University of Science and Technology
 
