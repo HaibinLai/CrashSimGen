@@ -13,7 +13,7 @@ os.makedirs(output_dir, exist_ok=True)
 for num in range(100):
     # generate dx dy
     polylines = ddpm(
-        batch_size = 36,
+        batch_size = 2,
         # generator=torch.manual_seed(1),
         num_inference_steps=diffusion_steps,
         #   output_type="pil",
