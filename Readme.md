@@ -3,7 +3,7 @@
 [[Poster(Comming Soon)]()]
 [[Proposal](https://github.com/HaibinLai/CrashSimGen/blob/main/CrashSimGen_proposal.pdf)] [[PPT](https://github.com/HaibinLai/CrashSimGen/blob/main/CrashSceneGen.pdf)] [[Project Page](https://haibinlai.github.io/CrashSimGen/)] [[Code](https://github.com/HaibinLai/CrashSimGen)]
 
-## CrashSimGen: Generating Dangerous Scenarios with Diffusion Models for self-Driving
+## CrashSimGen: Generating Safety-Critical Scenarios with Diffusion Models for self-Driving
 
 **Haibin Lai, Wenkun shen**
 
