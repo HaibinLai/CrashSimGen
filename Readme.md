@@ -1,7 +1,8 @@
 # CrashSimGen
 
 [[Poster(Comming Soon)]()]
-[[Proposal](https://github.com/HaibinLai/CrashSimGen/blob/main/CrashSimGen_proposal.pdf)] [[PPT](https://github.com/HaibinLai/CrashSimGen/blob/main/CrashSceneGen.pdf)] [[Project Page](https://haibinlai.github.io/CrashSimGen/)] [[Code](https://github.com/HaibinLai/CrashSimGen)]
+[[Final PPT](https://github.com/HaibinLai/CrashSimGen/blob/main/ML_DM_No_video.pptx)]
+[[Proposal](https://github.com/HaibinLai/CrashSimGen/blob/main/CrashSimGen_proposal.pdf)] [[Proposal PPT](https://github.com/HaibinLai/CrashSimGen/blob/main/CrashSceneGen.pdf)] [[Project Page](https://haibinlai.github.io/CrashSimGen/)] [[Code](https://github.com/HaibinLai/CrashSimGen)]
 
 ## CrashSimGen: Generating Safety-Critical Scenarios with Diffusion Models for self-Driving
 
