@@ -6,6 +6,8 @@
 
 ## CrashSimGen: Generating Safety-Critical Scenarios with Diffusion Models for self-Driving
 
+[[Bilibili Video Demo](https://www.bilibili.com/video/BV1ZPcxeFEP2/?share_source=copy_web&vd_source=72eac555730ba7e7a64f9fa1d7f2b2d4)]
+
 **Haibin Lai, Wenkun shen**
 
 Southern University of Science and Technology
