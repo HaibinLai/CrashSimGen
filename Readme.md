@@ -3,7 +3,6 @@
 [[Report](https://github.com/HaibinLai/CrashSimGen/blob/main/CrashSimGen__Final_ML_Project%20(9).pdf)]
 [[Poster](https://github.com/HaibinLai/CrashSimGen/blob/main/Poster.pdf)]
 [[Final PPT](https://github.com/HaibinLai/CrashSimGen/blob/main/ML_DM_No_video.pptx)]
-
 [[Code](https://github.com/HaibinLai/CrashSimGen)]
  [[Project Page](https://haibinlai.github.io/CrashSimGen/)]
 
