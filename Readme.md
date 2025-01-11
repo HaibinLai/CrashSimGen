@@ -28,6 +28,10 @@ CS329 Machine Learning (H) Course Project
 
 
 
+https://github.com/user-attachments/assets/b5d47f28-a7f7-45b7-89a1-c30e08b73c1d
+
+
+
 
 ![CrashSimGen Workflow and our work](img/ML_DM2.drawio.png)
 
