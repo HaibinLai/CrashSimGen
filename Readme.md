@@ -18,7 +18,7 @@
 
 Southern University of Science and Technology
 
-CS329 Machine Learning (H) Course Project
+CS329 Machine Learning (H) Course Project (**First Prize, 2nd Place**)
 
 <!-- ![alt text](img/image.png) -->
 <!-- ![CrashSimGen Workflow](img/ML_DM.drawio.png) -->
